@@ -1,16 +1,11 @@
 {
-  "name": "hackpack-chatbot",
+  "name": "petreon",
   "version": "1.0.0",
-  "description": "We're going to build a chatbot with Node.js that integrates with Facebook Messenger, Slack, and Telegram.",
+  "description": "We're going to build a chatbot with Node.js that integrates with Facebook Messenger.",
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TreeHacks/hackpack-chatbot.git"
-  },
-  "author": "Brandon Truong",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/TreeHacks/hackpack-chatbot/issues"
+    "url": "git+https://github.com/ellenluo/treehacks-2017.git"
   },
   "dependencies": {
     "babel-polyfill": "^6.13.0",
@@ -22,6 +17,5 @@
     "lodash": "^4.15.0",
     "request": "^2.74.0",
     "request-promise": "^4.1.1"
-  },
-  "homepage": "https://github.com/TreeHacks/hackpack-chatbot#readme"
+  }
 }
