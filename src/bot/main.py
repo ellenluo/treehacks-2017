@@ -1,4 +1,5 @@
 from __future__ import print_function
+import fbmq
 
 import json
 
@@ -11,9 +12,18 @@ def lambda_handler(event, context):
         params = event['params']['querystring']
         if params and params['hub.mode'] == 'subscribe':
             if params['hub.verify_token'] == verify_token:
-                return int(params['hub.challenge'])
+                return int(params['hub.challenge']), 200
             else:
-                return "Verification error"
+                return "Verification error", 403
     else:
-	print(json.dumps(event, indent = 2))
-    return event
+        print(event['body'])
+
+    response = {
+        'statusCode': 200,
+        'body': json.dumps({ 'success': True }),
+            'headers': {
+                'Content-Type': 'application/json',
+            }
+    };
+
+    return response
