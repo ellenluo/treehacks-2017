@@ -11,7 +11,8 @@ from sqlalchemy.orm import sessionmaker
 
 verify_token = "perrytheplatypus"
 PAGE_ACCESS_TOKEN = "EAAJjL86GCNQBAKofF9TZC7vtTSUQXXkt6fCCirOPg7ZC2HDZAzfKhvfAcxY4kTQ0IFpA1K6OXVxRrK85x5vRvmmsECPIzgZAZBFa5ObuozDa9tq9XxXc3HXWJCT6ogYEEj89r1bPx3K4nTRXMtyCNMThiv7pwCEOk1ZAF5ZBxULZCwZDZD"
-default_img  = "http://photos.petfinder.com/photos/pets/28854051/3/?bust=1432951081&width=500&-x.jpg"
+PETFINDER_API_KEY = "150d5bff08a3c97e69c2417d726c084d"
+DEFAULT_IMG = "http://photos.petfinder.com/photos/pets/28854051/3/?bust=1432951081&width=500&-x.jpg"
 
 engine = None
 
@@ -35,9 +36,12 @@ def lambda_handler(event, context):
             if message == 'next':
                 connectDb()
                 pet = getRandomPet()
-                #attachment = Attachment.Image(default_img)
-                #page.send(sender, attachment)
-                page.send(sender, "This pet is {} (id = {}).".format(pet.name, pet.pet_id))
+                page.send(sender, "This pet is {}!".format(pet.name))
+                page.send(sender, "(DEBUG pet_id ={})".format(pet.pet_id))
+                description, img = parsePetFromId(pet.pet_id)
+                attachment = Attachment.Image(img)
+                page.send(sender, attachment)
+                if description: page.send(sender, description)
                 page.send(sender, "Aww.")
         else:
             print(messaging)
@@ -82,4 +86,22 @@ def getRandomPet():
     query = session.query(Pet)
     return query.offset(idx).first()
 
+def parsePetFromId(id):
+    r = requests.get("http://api.petfinder.com/pet.get?format=json&key={}&id={}".format(PETFINDER_API_KEY, id))
+    data = json.loads(r.text)
+    pet = data['petfinder']['pet']
+    print(pet['description'])
+    description = pet['description'].get('$t', None)
+    photos = pet['media']['photos']['photo']
+    img = DEFAULT_IMG
+    sizing = ['t', 'pnt', 'fpm', 'pn', 'x']
+    biggest = -1
+    for photo in photos:
+        size = photo['@size']
+        if size not in sizing: continue
+        if sizing.index(size) > biggest:
+            img = photo['$t']
+            biggest = sizing.index(size)
 
+    return description, img
+        
