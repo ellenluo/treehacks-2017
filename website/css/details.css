@@ -1,6 +1,5 @@
-.overlay { 
-  color:#fff;
-  position:absolute;
+.overlay {
+  color: black;
   z-index:12;
   top:80%;
   left:0;
@@ -10,4 +9,19 @@
 
 #image-slide {
     margin-bottom: 20px;
+}
+
+.panel {
+    border-style: 1px solid;
+
+}
+
+.panel-title {
+    text-align: center;
+    color: white;
+}
+
+.panel > .panel-heading {
+    background-image: none;
+    background-color: #FF6600;
 }

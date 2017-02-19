@@ -47,7 +47,6 @@
     </div>
 </nav>
 
-<div class="overlay"><h1>{{name}}</h1></div>
 <div id="image-slide" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -86,20 +85,40 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
+<div class="overlay"><h1>{{name}}</h1></div>
+
 <div class="container">
     <div class="row">
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Info:</h3>
+                    <h3 class="panel-title">Info</h3>
                 </div>
                 <div class="panel-body">
-                    <p id="animal">{{animal}}</p>
-                    <p id="breed">{{breed}}</p>
-                    <p id="age">{{age}}</p>
-                    <p id="size">{{size}}</p>
-                    <p id="sex">{{sex}}</p>
-                    <p id="city">{{city}}</p>
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <td class="text-right col-md-6">Animal</td>
+                                <td id="animal">{{animal}}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">Breed</td>
+                                <td id="breed">{{breed}}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">Age</td>
+                                <td id="age">{{age}}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">Size</td>
+                                <td id="size">{{size}}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">Sex</td>
+                                <td id="sex">{{sex}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -107,10 +126,10 @@
                 <div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Description:</h3>
+                            <h3 class="panel-title">Description</h3>
                         </div>
                         <div class="panel-body">
-                            <p>{{description}}</p>
+                            <p id="desc">{{description}}</p>
                         </div>
                     </div>
                 </div>
@@ -118,13 +137,29 @@
                     <div class="col">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Shelter:</h3>
+                                <h3 class="panel-title">Shelter</h3>
                             </div>
                             <div class="panel-body">
-                                <p id="#shelter-name">{{name}}</p>
-                                <p id="#shelter-location">{{location}}</p>
-                                <p id="#shelter-phone">{{phone}}</p>
-                                <p id="#shelter-email">{{email}}</p>
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-right col-md-6">Name</td>
+                                            <td id="shelter-name">{{name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">Location</td>
+                                            <td id="shelter-location">{{location}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">Phone</td>
+                                            <td id="shelter-phone">{{phone}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right">Email</td>
+                                            <td id="shelter-email">{{email}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
