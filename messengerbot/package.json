@@ -1,7 +1,7 @@
 {
   "name": "petreon",
   "version": "1.0.0",
-  "description": "We're going to build a chatbot with Node.js that integrates with Facebook Messenger.",
+  "description": "a chatbot with Node.js that integrates with Facebook Messenger.",
   "main": "src/index.js",
   "repository": {
     "type": "git",
