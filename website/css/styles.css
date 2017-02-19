@@ -40,6 +40,12 @@ h4 {
     color: #FF6600;
 }
 
+.item a {
+    font: bold 20px/150% 'PT Sans', Helvetica, sans-serif;
+    color: #FF6600;
+    margin-bottom: 10px;
+}
+
 p {
     font: 16px/120% 'PT Sans', Helvetica, sans-serif;
 }
