@@ -65,18 +65,10 @@
     </a>
 </div>
 <div class="overlay"><h1>{{name}}</h1></div>
-<div class="row">
-    <div class="col-md-6 text-right">
-        <button type="button" class="btn btn-default">Pledge</button>
-    </div>
-    <div class="col-md-6 text-left">
-        <button type="button" class="btn btn-default">Adopt</button>
-    </div>
-</div>
-<div class="container">
 
+<div class="container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Info</h3>
@@ -85,23 +77,23 @@
                     <table class="table table-hover">
                         <tbody>
                             <tr>
-                                <td class="text-right col-md-6">Animal</td>
+                                <td class="text-right col-md-4"><strong>Animal</strong></td>
                                 <td id="animal">{{animal}}</td>
                             </tr>
                             <tr>
-                                <td class="text-right">Breed</td>
+                                <td class="text-right"><strong>Breed</strong></td>
                                 <td id="breed">{{breed}}</td>
                             </tr>
                             <tr>
-                                <td class="text-right">Age</td>
+                                <td class="text-right"><strong>Age</strong></td>
                                 <td id="age">{{age}}</td>
                             </tr>
                             <tr>
-                                <td class="text-right">Size</td>
+                                <td class="text-right"><strong>Size</strong></td>
                                 <td id="size">{{size}}</td>
                             </tr>
                             <tr>
-                                <td class="text-right">Sex</td>
+                                <td class="text-right"><strong>Sex</strong></td>
                                 <td id="sex">{{sex}}</td>
                             </tr>
                         </tbody>
@@ -118,19 +110,19 @@
                     <table class="table table-hover">
                         <tbody>
                             <tr>
-                                <td class="text-right col-md-6">Name</td>
+                                <td class="text-right col-md-4"><strong>Name</strong></td>
                                 <td id="shelter-name">{{name}}</td>
                             </tr>
                             <tr>
-                                <td class="text-right">Location</td>
+                                <td class="text-right"><strong>Location</strong></td>
                                 <td id="shelter-location">{{location}}</td>
                             </tr>
                             <tr>
-                                <td class="text-right">Phone</td>
+                                <td class="text-right"><strong>Phone</strong></td>
                                 <td id="shelter-phone">{{phone}}</td>
                             </tr>
                             <tr>
-                                <td class="text-right">Email</td>
+                                <td class="text-right"><strong>Email</strong></td>
                                 <td id="shelter-email">{{email}}</td>
                             </tr>
                         </tbody>
@@ -138,7 +130,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-7">
             <div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -150,6 +142,15 @@
                 </div>
             </div>
 
+        </div>
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <span><span id="pledge">{{pledge}}</span> pledged!</span>
+                    <button type="button" class="btn btn-default"><strong class="text-uppercase">Pledge</strong></button>
+                    <button type="button" class="btn btn-default"><strong class="text-uppercase">Adopt</strong></button>
+                </div>
+            </div>
         </div>
     </div>
 
