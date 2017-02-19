@@ -6,6 +6,7 @@ import psycopg2
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.exc import SQLAlchemyError
 import random
 
 verify_token = "perrytheplatypus"
@@ -31,6 +32,24 @@ def get_pet(event, context):
     else:
         return json.dumps({'errorMessage': "Pet not found"})
 
+def make_pledge(event, context):
+    session = connectDb()
+    amount = event['amount']
+    pet_id = event['pet_id']
+    user_id = event['user_id']
+
+    insert = Pledge(user_id, pet_id, amount)
+    session.add(insert)
+
+    try:
+        session.commit()
+    except SQLAlchemyError as e:
+        session.rollback()
+        print(str(e))
+
+    return json.dumps({'status': 200, 'message': "OK"})
+    return json.dumps({'errorMessage': "Not implemented"})
+
 Base = declarative_base()
 class Pet(Base):
     __tablename__ = 'pets'
@@ -43,6 +62,18 @@ class Pet(Base):
         self.pet_id = pet_id
         self.name = name
         self.pledged = 0
+
+class Pledge(Base):
+    __tablename__ = 'pledges'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(String(50), nullable=False)                              
+    pet_id = Column(Integer, nullable=False)                              
+    amount = Column(Integer, nullable=False)                              
+
+    def __init__(self, user_id, pet_id, amount):
+        self.user_id = str(user_id)
+        self.pet_id = pet_id
+        self.amount = amount
 
 def connectDb():
     global engine
