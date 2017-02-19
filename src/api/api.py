@@ -19,15 +19,17 @@ connected = False
 def list_pets(event, context):
     session = connectDb()
     pets = session.query(Pet).all()
-    pets = [{'id':pet.id, 'name': pet.name, 'pledged': pet.pledged} for pet in pets]
+    pets = [{'id':pet.pet_id, 'name': pet.name, 'pledged': pet.pledged} for pet in pets]
     return json.dumps(pets)
 
 def get_pet(event, context):
-    print(json.dumps(event))
+    pet_id = event['params']['path']['pet_id']
     session = connectDb()
-    return json.dumps({})
-    #pet = session.query(Pet).all()
-    
+    pet = session.query(Pet).filter(Pet.pet_id == pet_id).first()
+    if pet:
+        return json.dumps({'id':pet.pet_id, 'name': pet.name, 'pledged': pet.pledged})
+    else:
+        return json.dumps({'errorMessage': "Pet not found"})
 
 Base = declarative_base()
 class Pet(Base):
@@ -43,10 +45,11 @@ class Pet(Base):
         self.pledged = 0
 
 def connectDb():
-    if connected: return Session()
-
     global engine
     global connected
+    global Session
+    
+    if connected: return Session()
     user = 'perry'
     password = 'theplatypus'
     host = 'petron.ckcrv4vmtlra.us-west-2.rds.amazonaws.com'
