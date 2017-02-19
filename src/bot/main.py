@@ -21,9 +21,9 @@ def lambda_handler(event, context):
         params = event['params']['querystring']
         if params and params['hub.mode'] == 'subscribe':
             if params['hub.verify_token'] == verify_token:
-                return int(params['hub.challenge']), 200
+                return int(params['hub.challenge'])
             else:
-                return "Verification error", 403
+                return "Verification error"
     else:
         messaging = json.loads(event['body'])
         messaging = messaging['entry'][0]['messaging'][0]
@@ -37,7 +37,7 @@ def lambda_handler(event, context):
                 connectDb()
                 pet = getRandomPet()
                 page.send(sender, "This pet is {}!".format(pet.name))
-                page.send(sender, "(DEBUG pet_id ={})".format(pet.pet_id))
+                #page.send(sender, "(DEBUG pet_id ={})".format(pet.pet_id))
                 description, img = parsePetFromId(pet.pet_id)
                 attachment = Attachment.Image(img)
                 page.send(sender, attachment)
@@ -90,8 +90,21 @@ def parsePetFromId(id):
     r = requests.get("http://api.petfinder.com/pet.get?format=json&key={}&id={}".format(PETFINDER_API_KEY, id))
     data = json.loads(r.text)
     pet = data['petfinder']['pet']
-    print(pet['description'])
-    description = pet['description'].get('$t', None)
+    print(pet)
+    desc_key = pet['description'].keys()
+    print(desc_key)
+    desc_key = desc_key[0] if desc_key else None
+    print(desc_key)
+    description = pet['description'].get(desc_key, None)
+    print(description)
+    if description:
+        description = description.encode('utf-8', 'ignore')
+        if len(description) > 640:
+            description = description[:637] + '...'
+        skip_text = ["This is the Animal Description Header", "This is the Animal Description Footer"]
+        for skip in skip_text:
+            description = description.replace(skip, "")
+        description = description.strip()
     photos = pet['media']['photos']['photo']
     img = DEFAULT_IMG
     sizing = ['t', 'pnt', 'fpm', 'pn', 'x']
@@ -103,5 +116,4 @@ def parsePetFromId(id):
             img = photo['$t']
             biggest = sizing.index(size)
 
-    return description, img
-        
+    return (description, img)
