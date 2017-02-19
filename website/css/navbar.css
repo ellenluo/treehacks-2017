@@ -19,6 +19,7 @@ p {
     -o-transition: color .5s ease;
     -webkit-transition: color .5s ease;
     transition: color .5s ease;
+    text-shadow: none;
 }
 
 .navlink:hover {
