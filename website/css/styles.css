@@ -27,6 +27,10 @@ body {
     margin-bottom: 30px;
 }
 
+.filter-options {
+    background-color: #EEEEEE;
+}
+
 .item {
     margin: 20px 0;
     padding: 10px;
