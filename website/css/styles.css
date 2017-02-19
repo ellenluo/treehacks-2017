@@ -30,6 +30,9 @@ h1 {
 .navlink {
     color: white;
 }
+.navlink:hover {
+    color: white;
+}
 
 .navbar {
     background-color: #FF6600;
