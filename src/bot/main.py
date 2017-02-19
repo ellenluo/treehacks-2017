@@ -8,6 +8,7 @@ import psycopg2
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import random
 
 verify_token = "perrytheplatypus"
 PAGE_ACCESS_TOKEN = "EAAJjL86GCNQBAKofF9TZC7vtTSUQXXkt6fCCirOPg7ZC2HDZAzfKhvfAcxY4kTQ0IFpA1K6OXVxRrK85x5vRvmmsECPIzgZAZBFa5ObuozDa9tq9XxXc3HXWJCT6ogYEEj89r1bPx3K4nTRXMtyCNMThiv7pwCEOk1ZAF5ZBxULZCwZDZD"
@@ -36,13 +37,14 @@ def lambda_handler(event, context):
             if message == 'next':
                 connectDb()
                 pet = getRandomPet()
-                page.send(sender, "This pet is {}!".format(pet.name))
+                page.send(sender, "This is {}!".format(pet.name))
                 #page.send(sender, "(DEBUG pet_id ={})".format(pet.pet_id))
                 description, img = parsePetFromId(pet.pet_id)
                 attachment = Attachment.Image(img)
                 page.send(sender, attachment)
+                buttons = [Template.ButtonWeb("Support {}".format(pet.name), "https://www.google.com")]
                 if description: page.send(sender, description)
-                page.send(sender, "Aww.")
+                page.send(sender, Template.Buttons(naturalLanguage("emphatic"), buttons))
         else:
             print(messaging)
 
@@ -78,7 +80,6 @@ def connectDb():
     engine = create_engine('postgresql+psycopg2://{}:{}@{}:{}/{}'.format(user, password, host, port, database))
 
 def getRandomPet():
-    import random
     ct = 1000
     idx = random.randint(0, ct -1)
     Session = sessionmaker(bind=engine)
@@ -86,17 +87,18 @@ def getRandomPet():
     query = session.query(Pet)
     return query.offset(idx).first()
 
+def naturalLanguage(category):
+    if category == "emphatic":
+        choices = ["Aww.", "Cutie.", ":D"]
+        return choices[random.randint(0, len(choices) -1)]
+
 def parsePetFromId(id):
     r = requests.get("http://api.petfinder.com/pet.get?format=json&key={}&id={}".format(PETFINDER_API_KEY, id))
     data = json.loads(r.text)
     pet = data['petfinder']['pet']
-    print(pet)
     desc_key = pet['description'].keys()
-    print(desc_key)
     desc_key = desc_key[0] if desc_key else None
-    print(desc_key)
     description = pet['description'].get(desc_key, None)
-    print(description)
     if description:
         description = description.encode('utf-8', 'ignore')
         if len(description) > 640:
