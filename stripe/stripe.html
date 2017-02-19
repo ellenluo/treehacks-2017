@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Pledge</title>
+        <link rel="stylesheet" type="text/css" href="stripe.css">
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans|PT+Sans:700|Raleway:500" rel="stylesheet">
+    </head>
+    <body>
+        <div style="align-self: center">
+            <label>I would like to pledge $</label>
+            <input id="enter_pledge" type="number" name="pledgeAmount" value="1">
+        </div>
+        <div style="align-self: center" id="error_explanation">
+        </div>
+        <script src="../website/js/jquery.js"></script>
+        <script src="https://checkout.stripe.com/checkout.js"></script>
+        <script src="stripe.js"></script>
+    </body>
+</html>
