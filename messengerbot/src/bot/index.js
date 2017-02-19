@@ -56,37 +56,44 @@ const defaultResponses = {
         type: "template",
         payload: {
             template_type: "button",
-            text: "pick an animal",
+            text: "Pick an animal",
             buttons: [
                 {
                     type: "postback",
                     title: "Dog",
-                    payload: "dog"
+                    payload: "dogPostback"
                 },
                 {
                     type: "postback",
                     title: "Cat",
-                    payload: "cat"
+                    payload: "catPostback"
                 }
             ]
         }
     },
-    quickselect: {
-        text: "Pick an animal",
-        quick_replies: [
-            {
-                content_type: "text",
-                title: "Cat",
-                payload: 'cat'
-            },
-            {
-                content_type: "text",
-                title: "Dog",
-                payload: 'dog'
-            }
-        ]
-    }
+    // quickselect: {
+    //     text: "Pick an animal",
+    //     quick_replies: [
+    //         {
+    //             content_type: "text",
+    //             title: "Cat",
+    //             payload: 'cat'
+    //         },
+    //         {
+    //             content_type: "text",
+    //             title: "Dog",
+    //             payload: 'dog'
+    //         }
+    //     ]
+    // }
 }
+
+var catPostback = {
+    payload: "catpayload"
+};
+var dogPostback = {
+    payload: "dogpayload"
+};
 
 export const handleMessage = ({message, userKey}) => {
     return getResponsesForMessage({message, userKey})
@@ -112,27 +119,30 @@ const buildMessage = (message, key) => {
             key
         }
     } else if(typeof message === 'object') {
-        if('quick_replies' in message) {
-            return {
-                text: message.text,
-                quick_replies: message.quick_replies,
-                key
-            }
+
+        return {
+            attachment: message,
+            key
         }
-        else {
-            return {
-                attachment: message,
-                key
-            }
-        }
+
     }
 };
 
 const getResponsesForMessage = ({message, userKey}) => {
     return new Promise((resolve, reject) => {
+        console.log(message);
+        console.log(reject);
         if(message.text === 'hi') {
             resolve([defaultResponses.listing]);
         }
-        
+        else if(message.text === 'select') {
+            // resolve([defaultResponses.selection]);
+        }
+        else if(message.text === 'Dog' || message.text === 'Cat') {
+            resolve([defaultResponses.listing]);
+        }
+        else {
+            resolve([defaultResponses.invalidMessage]);
+        }
     });
 };
