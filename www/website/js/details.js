@@ -56,11 +56,11 @@ jQuery(document).ready(function () {
         loadShelter(shelterId);
 
         // populate pledge
-        populatePledge();
+        //populatePledge();
     }
 
     // populates pledge
-    function populatePledge() {
+    /*function populatePledge() {
         console.log(petId);
         $.ajax({
             dataType: 'jsonp',
@@ -73,7 +73,7 @@ jQuery(document).ready(function () {
                 console.log(errorThrown);
             }
         });
-    }
+    }*/
 
     // load shelter data
     function loadShelter(shelterId) {

@@ -13,6 +13,16 @@ p {
     color: black;
 }
 
+span {
+    font: 16px/120% 'PT Sans', Helvetica, sans-serif;
+    color: black;
+}
+
+table {
+    font: 16px/120% 'PT Sans', Helvetica, sans-serif;
+    color: black;
+}
+
 .navlink {
     color: white;
     -moz-transition: color .5s ease;

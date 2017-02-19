@@ -1,7 +1,12 @@
 /* Fonts */
 
 h1 {
+    font: bold 20px/150% 'PT Sans', Helvetica, sans-serif;
     color: black;
+}
+
+.pledge-text {
+    color: #FF6600;
 }
 
 /* Elements */
@@ -47,25 +52,31 @@ h1 {
     background: #FF6600;
     color: white;
 }
+
 .btn {
     text-shadow: none;
     border: 0 none;
+    font: bold 16px/150% 'PT Sans', Helvetica, sans-serif;
 }
+
 .btn-default {
     width: 100%;
-    height: 70px;
-    margin-bottom: 20px;
+    height: 50px;
+    margin-bottom: 15px;
     color: white;
     background: #FF6600;
 }
+
 .btn-default:visited {
     color: white;
     background: #FF6600;
 }
+
 .btn-default:hover {
     background: white !important;
     color: #FF6600;
 }
+
 .btn-default:active {
     background: #FF6600 !important;
     color: white !important;
