@@ -1,0 +1,21 @@
+
+.navlink {
+    color: white;
+}
+.navlink:hover {
+    color: white;
+}
+
+.navbar {
+    background-color: #FF6600;
+}
+
+.navbar-brand {
+    font: 500 20px/100% Raleway, Helvetica, sans-serif;
+    color: white;
+}
+
+.navbar-nav {
+    font: 500 14px/100% Raleway, Helvetica, sans-serif;
+    color: #FF6600;
+}
