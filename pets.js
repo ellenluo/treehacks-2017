@@ -1,4 +1,5 @@
 var http = require('http');
+var https = require('https');
 var crypto = require('crypto');
 var parseString = require('xml2js').parseString;
 
@@ -31,19 +32,22 @@ callback = function(response) {
     });
 
     response.on('end', function () {
-        // parseString(str, function (err, result) {
-        //     console.log(result);
-        //     console.log(result.petfinder.pets[0].pet[0].description);
-        //     // console.log(result.petfinder.breeds);
-        //     // var pet = result.petfinder.pet;
-        //     // console.log(pet);
-        //     // console.log(pet[0]['id']);
-        // });
         console.log(JSON.parse(str));
-
+        jsonObj = JSON.parse(str);
+        if(jsonObj.hasOwnProperty('petfinder')) {
+            console.log(jsonObj.petfinder.petIds);
+            pedID = jsonObj.petfinder.petIds.id;
+            console.log(petID);
+        }
     });
 }
-var url = 'http://api.petfinder.com/pet.find?key=150d5bff08a3c97e69c2417d726c084d&location=94720&format=json';
+// var url = 'http://api.petfinder.com/pet.find?key=150d5bff08a3c97e69c2417d726c084d&location=94720&format=json';
 // var url = 'http://api.petfinder.com/pet.get?key=150d5bff08a3c97e69c2417d726c084d&id=3934198';
 // var url = 'http://api.petfinder.com/breed.list?key=150d5bff08a3c97e69c2417d726c084d&animal=barnyard';
+var url = 'http://api.petfinder.com/pet.getRandom?key=150d5bff08a3c97e69c2417d726c084d&location=94720&format=json';
+var petID = "";
 http.request(url, callback).end();
+
+
+var url = 'https://5sqk10icy4.execute-api.us-west-2.amazonaws.com/dev/pets/35107430'
+https.request(url, callback).end();
