@@ -86,11 +86,11 @@ jQuery(document).ready(function () {
 
     // populate photo carousel
     function populateCarousel(photos) {
-        for (var i = 0; i < photos.length; i++) {
-            $('<div class="item"><img src="' + photos[i] + '"><div class="carousel-caption"></div>   </div>').appendTo('.carousel-inner');
-            $('<li data-target="#image-slide" data-slide-to="' + i + '"></li>').appendTo('.carousel-indicators')
+        $.each(photos, function (i, obj) {
+            $('<div class="item"><img src="' + obj.$t + '"><div class="carousel-caption"></div></img></div>').appendTo('.carousel-inner');
+            $('<li data-target="#image-slide" data-slide-to="' + i + '"></li>').appendTo('.carousel-indicators');
+        });
 
-        }
         $('.item').first().addClass('active');
         $('.carousel-indicators > li').first().addClass('active');
         $('#image-slide').carousel();

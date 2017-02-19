@@ -9,11 +9,16 @@
 
 #image-slide {
     margin-bottom: 20px;
+    height: 500px;
+    overflow: hidden;
+}
+
+#image-slide img {
+    width: 100%;
 }
 
 .panel {
     border-style: 1px solid;
-
 }
 
 .panel-title {
