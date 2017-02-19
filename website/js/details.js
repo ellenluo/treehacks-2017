@@ -20,7 +20,7 @@ jQuery(document).ready(function () {
     function populateData(pet) {
         console.log(pet);
 
-        // set photo
+        // populate photo carousel
         var photos = [];
         if (pet.media.photos != null) {
             $.each(pet.media.photos.photo, function (i, obj) {
@@ -29,6 +29,7 @@ jQuery(document).ready(function () {
                 }
             });
         }
+        populateCarousel(photos);
 
         // find breeds
         var breeds = [];
@@ -43,11 +44,12 @@ jQuery(document).ready(function () {
 
         // populate pet details
         $('.overlay').find('h1').text(pet.name.$t);
-        $('#animal').text("Animal: " + pet.animal.$t);
-        $('#breed').text("Breed(s): " + breeds.join(", "));
-        $('#age').text("Age: " + pet.age.$t);
-        $('#size').text("Size: " + pet.size.$t);
-        $('#sex').text("Sex: " + pet.sex.$t);
+        $('#animal').text(pet.animal.$t);
+        $('#breed').text(breeds.join(", "));
+        $('#age').text(pet.age.$t);
+        $('#size').text(pet.size.$t);
+        $('#sex').text(pet.sex.$t);
+        $('#desc').text(pet.description.$t);
 
         // populate shelter info
         var shelterId = pet.shelterId.$t;
@@ -62,9 +64,8 @@ jQuery(document).ready(function () {
             url: "http://api.petfinder.com/shelter.get?format=json&key=150d5bff08a3c97e69c2417d726c084d&id=" + shelterId,
             data: "",
             success: function (data) {
-                var shelter= data.petfinder.shelter;
+                var shelter = data.petfinder.shelter;
                 populateShelter(shelter);
-                console.log(shelter);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(errorThrown);
@@ -74,23 +75,26 @@ jQuery(document).ready(function () {
 
     // populate shelter data
     function populateShelter(shelter) {
-        console.log("done");
-        $('#shelter-name').text("Name: " + shelter.name.$t);
-        $('#shelter-phone').text("Phone: " + shelter.phone.$t);
-        $('#shelter-email').text("Email: " + shelter.email.$t);
+        var location = shelter.city.$t + ", " + shelter.state.$t + ", " + shelter.country.$t + ", " + shelter.zip.$t;
+
+        console.log(shelter);
+        $('#shelter-name').text(shelter.name.$t);
+        $('#shelter-location').text(location);
+        $('#shelter-phone').text(shelter.phone.$t);
+        $('#shelter-email').text(shelter.email.$t);
     }
 
     // populate photo carousel
-    /*function populateCarousel(photos) {
-        for(var i=0 ; i< m.length ; i++) {
-            $('<div class="item"><img src="'+m[i]+'"><div class="carousel-caption"></div>   </div>').appendTo('.carousel-inner');
-            $('<li data-target="#carousel-example-generic" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
+    function populateCarousel(photos) {
+        for (var i = 0; i < photos.length; i++) {
+            $('<div class="item"><img src="' + photos[i] + '"><div class="carousel-caption"></div>   </div>').appendTo('.carousel-inner');
+            $('<li data-target="#image-slide" data-slide-to="' + i + '"></li>').appendTo('.carousel-indicators')
 
         }
         $('.item').first().addClass('active');
         $('.carousel-indicators > li').first().addClass('active');
-        $('#carousel-example-generic').carousel();
-    }*/
+        $('#image-slide').carousel();
+    }
 
     // check if JSON is object or array
     function isArray(what) {
