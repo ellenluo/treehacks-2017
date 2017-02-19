@@ -1,10 +1,19 @@
+/* Fonts */
+
+h1 {
+    color: black;
+}
+
+/* Elements */
+
 .overlay {
-  color: black;
-  z-index:12;
-  top:80%;
-  left:0;
-  width:100%;
-  text-align:center;
+    color: black;
+    z-index: 12;
+    top: 80%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin: 50px 0;
 }
 
 #image-slide {
@@ -17,16 +26,15 @@
     width: 100%;
 }
 
-.panel {
-    border-style: 1px solid;
-}
-
 .panel-title {
     text-align: center;
-    color: white;
 }
 
 .panel > .panel-heading {
     background-image: none;
-    background-color: #FF6600;
+    background-color: #EEEEEE;;
+}
+
+.table {
+    margin-bottom: 0;
 }
