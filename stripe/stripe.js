@@ -1,4 +1,4 @@
-jQuery(document).ready(function () {
+jQuery(document).ready(function (id) {
   var handler = StripeCheckout.configure({
     key: 'pk_test_1ikCSptUI6ji5bnIwVIL3CU6',
     image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
@@ -6,6 +6,10 @@ jQuery(document).ready(function () {
     token: function(token) {
         // You can access the token ID with `token.id`.
         // Get the token ID to your server-side code for use.
+        $.post("https://5sqk10icy4.execute-api.us-west-2.amazonaws.com/dev/pledges/{id}", {
+            pet_id: id,
+            pledge_amount: amount
+        })
     }
   });
   
