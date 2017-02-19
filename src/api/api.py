@@ -7,6 +7,7 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy import update
 import random
 
 verify_token = "perrytheplatypus"
@@ -40,6 +41,7 @@ def make_pledge(event, context):
 
     insert = Pledge(user_id, pet_id, amount)
     session.add(insert)
+    session.execute("UPDATE {0} SET {1} = {1} + {2} WHERE {3} = {4}".format("pets", "pledged", amount, "pet_id", pet_id))
 
     try:
         session.commit()
@@ -48,7 +50,21 @@ def make_pledge(event, context):
         print(str(e))
 
     return json.dumps({'status': 200, 'message': "OK"})
-    return json.dumps({'errorMessage': "Not implemented"})
+
+def adopt_pet(event, context):
+    session = connectDb()
+    pet_id = event['pet_id']
+    user_id = event['user_id']
+    session.execute("UPDATE {0} SET {1} = {2} WHERE {3} = {4}".format("pets", "owner", user_id, "pet_id", pet_id))
+    
+    try:
+        session.commit()
+    except SQLAlchemyError as e:
+        session.rollback()
+        print(str(e))
+
+    return json.dumps({'status': 200, 'message': "OK"})
+    #return json.dumps({'errorMessage': "Not implemented"})
 
 Base = declarative_base()
 class Pet(Base):
@@ -57,6 +73,7 @@ class Pet(Base):
     pet_id = Column(Integer, unique=True, nullable=False)                              
     name = Column(String(1000), nullable=False) 
     pledged = Column(Integer, nullable=False)
+    owner = Column(String(50))
 
     def __init__(self, pet_id, name):
         self.pet_id = pet_id
