@@ -1,17 +1,11 @@
 body {
     padding-bottom: 40px;
-    padding-top: 70px;
+    padding-top: 80px;
 }
 
 /* Infinite scroll */
 #pages {
     display: none;
-}
-
-.img {
-    width: 100%;
-    height: 200px;
-    background-color: #EEEEEE;
 }
 
 #loader {
@@ -29,7 +23,8 @@ body {
 
 /* Fonts */
 h1 {
-    font: 500 32px/150% Raleway, Helvetica, sans-serif;
+    font: 500 40px/150% Raleway, Helvetica, sans-serif;
+    color: #FF6600;
 }
 
 .navbar-brand {
@@ -37,15 +32,38 @@ h1 {
 }
 
 .navbar-nav {
-    font: 500 16px/100% Raleway, Helvetica, sans-serif;
+    font: 500 14px/100% Raleway, Helvetica, sans-serif;
 }
 
-/* Margins */
+h4 {
+    font: bold 20px/150% 'PT Sans', Helvetica, sans-serif;
+    color: #FF6600;
+}
+
+p {
+    font: 16px/120% 'PT Sans', Helvetica, sans-serif;
+}
+
+/* Elements */
 
 .hero-unit {
     margin-bottom: 50px;
 }
 
 .item {
-    margin-bottom: 25px;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #EEEEEE;
+}
+
+.img {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+}
+
+.caption {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
