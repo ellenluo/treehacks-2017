@@ -13,7 +13,7 @@ h1 {
     left: 0;
     width: 100%;
     text-align: center;
-    margin: 50px 0;
+    margin: 20px 0;
 }
 
 #image-slide {
@@ -37,4 +37,15 @@ h1 {
 
 .table {
     margin-bottom: 0;
+}
+
+
+.btn-default {
+    width: 150px;
+    margin-bottom: 20px;
+    background-color: #FF6600;
+}
+
+.btn-default:hover {
+    background-color: #FF6600;
 }
