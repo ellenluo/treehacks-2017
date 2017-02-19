@@ -27,52 +27,13 @@
             </button>
             <a class="navbar-brand navlink" href="index.html">Petreon</a>
         </div>
-
-        <div class="col-sm-3 col-md-3">
-            <form class="navbar-form" role="search">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="q">
-                    <div class="input-group-btn">
-                        <button class="btn" type="submit"><i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a class="navlink" href="login.html">Login</a>
-            </li>
-            <li>
-                <a class="navlink" href="#">Register</a>
-            </li>
-        </ul>
     </div>
 </nav>
 
 <!-- This is the overlay DIV while loading a new page -->
 <div id="loader"></div>
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="filter-options">
-            <div class="col-sm-12">
-                <h4>Filter Options:</h4>
-            </div>
-            <div class="col-sm-4">
-                <h5>Location:</h5>
-            </div>
-            <div class="col-sm-4">
-                <h5>Animal:</h5>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="container">
-
-
     <div class="row">
         <div class="col-sm-12">
             <div class="hero-unit">
@@ -80,6 +41,73 @@
                 <p class="">Our goal is to help homeless animals find a family. Pledge to support a pet and you will
                     receive updates when the pet is adopted (and cute photo updates once in a while). Adopt a pet, and
                     you will receive the monthly pledge!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row filter-options">
+                <div class="col-sm-3 filter-field">
+                    <h5>Location:</h5>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="filter-zip" placeholder="Enter ZIP Code">
+                        <span class="input-group-btn"><button class="btn btn-default" type="button" id="filter-zip-btn">Go</button></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <h5>Type:</h5>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                data-toggle="dropdown">
+                            All
+                            <span class="caret"></span></button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item active" id="all_animals">All</a>
+                            <a class="dropdown-item" id="barnyard">Barnyard</a>
+                            <a class="dropdown-item" id="bird">Bird</a>
+                            <a class="dropdown-item" id="cat">Cat</a>
+                            <a class="dropdown-item" id="dog">Dog</a>
+                            <a class="dropdown-item" id="horse">Horse</a>
+                            <a class="dropdown-item" id="pig">Pig</a>
+                            <a class="dropdown-item" id="reptile">Reptile</a>
+                            <a class="dropdown-item" id="small_furry">Small Furry</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <h5>Age:</h5>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                data-toggle="dropdown">
+                            All
+                            <span class="caret"></span></button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item active" id="all_ages">All</a>
+                            <a class="dropdown-item" id="baby">Baby</a>
+                            <a class="dropdown-item" id="young">Young</a>
+                            <a class="dropdown-item" id="adult">Adult</a>
+                            <a class="dropdown-item" id="senior">Senior</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <h5>Gender:</h5>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                data-toggle="dropdown">
+                            All
+                            <span class="caret"></span></button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item active" id="all_genders">All</a>
+                            <a class="dropdown-item" id="male">Male</a>
+                            <a class="dropdown-item" id="female">Female</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
