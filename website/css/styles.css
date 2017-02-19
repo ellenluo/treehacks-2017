@@ -35,15 +35,20 @@ h1 {
     font: 500 14px/100% Raleway, Helvetica, sans-serif;
 }
 
-h4 {
+.item a {
+    display: block;
     font: bold 20px/150% 'PT Sans', Helvetica, sans-serif;
     color: #FF6600;
+    margin: 10px 0;
+    -moz-transition: color .5s ease;
+    -o-transition: color .5s ease;
+    -webkit-transition: color .5s ease;
+    transition: color .5s ease;
 }
 
-.item a {
-    font: bold 20px/150% 'PT Sans', Helvetica, sans-serif;
-    color: #FF6600;
-    margin-bottom: 10px;
+.item a:hover {
+    text-decoration: none;
+    color: black;
 }
 
 p {
@@ -53,7 +58,7 @@ p {
 /* Elements */
 
 .hero-unit {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .item {
@@ -72,4 +77,8 @@ p {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+}
+
+.pet-id {
+    display: none;
 }

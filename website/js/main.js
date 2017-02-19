@@ -26,7 +26,6 @@ jQuery(document).ready(function () {
 
     //loads the next page and append it to the content with a fadeIn effect.
     function loadMoreContent(position) {
-        //try to load more content only if the counter is minor than the number of total pages
         if (position < pages.length) {
             $('#loader').fadeIn('slow', function () {
                 $.get(pages[position], function (data) {
@@ -81,22 +80,38 @@ jQuery(document).ready(function () {
             $(obj).find(".img").css("background-image", "url(" + photo + ")");
 
             // set details
-            var details = '';
+            var details = [];
             var breeds = pet.breeds.breed;
             if (isArray(breeds)) {
                 $.each(breeds, function (i, obj) {
-                    details = details + obj.$t + " | ";
+                    details.push(obj.$t);
                 });
             } else {
-                details = breeds.$t;
+                details = [breeds.$t];
             }
-            $(obj).find("p").text(details);
+            $(obj).find("p").text(details.join(", "));
+            $(obj).find(".pet-id").text(pet.id.$t);
         });
     }
 
     // check if JSON is object or array
     function isArray(what) {
         return Object.prototype.toString.call(what) === '[object Array]';
+    }
+
+    // mouseover/click events for pets
+    $(".item a").on("mouseover", function () {
+        $('.item a').css('cursor', 'pointer');
+    }).click(function () {
+        saveData($(this));
+        window.location.href = "details.html"
+    });
+
+    // store json
+    function saveData(selector) {
+        var id = selector.parent().find('.pet-id').text();
+        console.log(id);
+        localStorage.setItem("current_pet_id", id);
     }
 
 });
